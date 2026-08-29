@@ -1,0 +1,18 @@
+/* blue-os — masque les propriétés vides dans le panneau Properties.
+   Metadata Hider 1.0.2 génère des sélecteurs pour un DOM antérieur à
+   Obsidian 1.13 (classe .mod-truncate disparue) : ces règles font le même
+   travail contre le DOM actuel. Les champs vides réapparaissent dès que le
+   panneau a le focus (clic dans une propriété), donc restent remplissables. */
+
+.metadata-container:focus-within .metadata-property {
+  display: flex !important;
+}
+
+/* Texte vide */
+.metadata-property:has(.metadata-property-value .metadata-input-longtext:empty),
+/* Liste vide (multi-select sans aucune pastille) */
+.metadata-property:has(.metadata-property-value .multi-select-container > .multi-select-input:first-child),
+/* Nombre vide */
+.metadata-property:has(.metadata-property-value input.metadata-input[type="number"]:placeholder-shown) {
+  display: none;
+}

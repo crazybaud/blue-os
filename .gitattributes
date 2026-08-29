@@ -1,0 +1,2 @@
+# Vendored plugin bundles: collapsed in GitHub PR diffs, excluded from stats.
+.obsidian/plugins/** linguist-generated=true

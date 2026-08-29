@@ -1,0 +1,153 @@
+/* blue-os — QuickAdd one-page form: stacked labels, two-column layout,
+   sticky footer. Also hides the scripts/ folder from the file explorer
+   (it must stay non-hidden on disk: QuickAdd loads user scripts via the
+   vault index). */
+
+.nav-folder:has(> .nav-folder-title[data-path="scripts"]),
+.tree-item.nav-folder:has(> .tree-item-self[data-path="scripts"]) {
+  display: none;
+}
+
+/* Centered in the window, taller. */
+.onePageInputModal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.onePageInputModal .modal {
+  width: min(660px, 92vw);
+  height: min(78vh, 760px);
+  display: flex;
+  flex-direction: column;
+}
+
+.onePageInputModal .modal-content {
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+/* No "Provide inputs" heading, and no horizontal rule above the first
+   field (modal header, first setting-item top border, stray hr). */
+.onePageInputModal .qa-onepage-title,
+.onePageInputModal .modal-content hr {
+  display: none;
+}
+
+.onePageInputModal .modal-header,
+.onePageInputModal .modal-title {
+  display: none;
+  border: none;
+}
+
+/* Obsidian's core stylesheet draws a border-top on every setting row (with
+   selectors more specific than ours) — the stray line above Title and the
+   ones between rows. !important is deliberate: core styles win otherwise. */
+.onePageInputModal .modal-content > *,
+.onePageInputModal .setting-item {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+/* Two-column grid — the design system shared by ALL creation wizards
+   (New Action / Decision / Information / Journal): fields 1 and 2 span the
+   full width, then fields 3+4, 5+6 and 7+8 pair up on shared rows. Every
+   wizard script orders its fields to fit this pattern; change one side,
+   change the other. */
+.onePageInputModal .modal-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 18px;
+  align-content: start;
+}
+
+.onePageInputModal .modal-content > * {
+  grid-column: 1 / -1;
+}
+
+.onePageInputModal .modal-content > div.setting-item:nth-of-type(3),
+.onePageInputModal .modal-content > div.setting-item:nth-of-type(5),
+.onePageInputModal .modal-content > div.setting-item:nth-of-type(7) {
+  grid-column: 1;
+}
+
+.onePageInputModal .modal-content > div.setting-item:nth-of-type(4),
+.onePageInputModal .modal-content > div.setting-item:nth-of-type(6),
+.onePageInputModal .modal-content > div.setting-item:nth-of-type(8) {
+  grid-column: 2;
+}
+
+/* Each field: label above, control in the middle, description (legend)
+   below the input — .setting-item-info is flattened with display:contents
+   so its children can be reordered around the control. */
+.onePageInputModal .setting-item {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  border-top: none;
+  padding: 0.55em 0;
+}
+
+.onePageInputModal .setting-item-info {
+  display: contents;
+}
+
+.onePageInputModal .setting-item-name {
+  order: 1;
+}
+
+.onePageInputModal .setting-item-control {
+  order: 2;
+}
+
+.onePageInputModal .setting-item-description {
+  order: 3;
+  margin-top: 0;
+}
+
+.onePageInputModal .setting-item-control {
+  width: 100%;
+  justify-content: stretch;
+}
+
+.onePageInputModal .setting-item-control input[type="text"],
+.onePageInputModal .setting-item-control textarea,
+.onePageInputModal .setting-item-control select,
+.onePageInputModal .setting-item-control .dropdown {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Date field: natural-language input only — no calendar, no collapsible
+   alias list (the useful aliases are inlined in the field description). */
+.onePageInputModal .qa-date-picker-container,
+.onePageInputModal .qa-date-alias-details {
+  display: none;
+}
+
+/* Hide the "Will be left empty" preview while the date input is empty;
+   the preview reappears to show the resolved date once you type. */
+.onePageInputModal .setting-item-control:has(input:placeholder-shown) .qa-date-preview-text,
+.onePageInputModal .setting-item:has(input.qa-date-input:placeholder-shown) .qa-date-preview-text {
+  display: none;
+}
+
+/* Submit / Cancel pinned at the bottom of the modal. (border-top must
+   out-specific the border-kill rule above, hence !important too.) */
+.onePageInputModal .modal-content > div:last-child {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  grid-column: 1 / -1;
+  background: var(--background-primary);
+  border-top: 1px solid var(--background-modifier-border) !important;
+  padding: 10px 0 2px;
+  margin-top: 8px;
+}
+
+.onePageInputModal .modal-content > div:last-child .setting-item {
+  padding: 0;
+  flex-direction: row;
+  justify-content: flex-end;
+}

@@ -1,0 +1,37 @@
+{
+  "palette": {
+    "seed": 0,
+    "selected": "adaptive-soft",
+    "custom": "e12729-f37324-f8cc1b-72b043-007f4e"
+  },
+  "mixColors": true,
+  "transition": true,
+  "accessibility": {
+    "highTextContrast": false
+  },
+  "knownTags": {
+    "advisor": 17,
+    "agent": 1,
+    "call": 18,
+    "finance": 11,
+    "founder": 2,
+    "genetic": 23,
+    "growth": 12,
+    "insight": 24,
+    "investor": 19,
+    "launch": 6,
+    "legal": 13,
+    "medical": 9,
+    "migration": 20,
+    "mission": 3,
+    "operations": 14,
+    "orga": 15,
+    "partner": 8,
+    "partnership": 10,
+    "product": 16,
+    "prospect": 22,
+    "supplier": 21
+  },
+  "tagColors": {},
+  "_version": 4
+}

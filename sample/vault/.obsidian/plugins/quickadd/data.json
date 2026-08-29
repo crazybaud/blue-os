@@ -1,0 +1,314 @@
+{
+  "choices": [
+    {
+      "id": "f6c61162-06c7-4202-b5c8-4fef709609b3",
+      "name": "New Action",
+      "type": "Macro",
+      "command": true,
+      "runOnStartup": false,
+      "macro": {
+        "name": "New Action",
+        "id": "b0227984-e3d8-454c-b9d0-8c3caa02f45e",
+        "commands": [
+          {
+            "name": "new-action",
+            "type": "UserScript",
+            "id": "116d2811-bb1e-4c35-ab2c-32abb72a20f7",
+            "path": "scripts/quickadd/new-action.js",
+            "settings": {}
+          }
+        ]
+      },
+      "icon": "circle-plus"
+    },
+    {
+      "id": "6a5b93fa-8f8c-453a-876e-591add417cf6",
+      "name": "Sync filename to Title",
+      "type": "Macro",
+      "command": true,
+      "runOnStartup": false,
+      "icon": "file-pen",
+      "macro": {
+        "name": "Sync filename to Title",
+        "id": "22f60f2f-cc96-461d-b34f-036828686c4f",
+        "commands": [
+          {
+            "name": "sync-filename-to-title",
+            "type": "UserScript",
+            "id": "1917e9d0-06dd-4b29-8c1b-ce248cce92fb",
+            "path": "scripts/quickadd/sync-filename-to-title.js",
+            "settings": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "03eacf23-cd06-4709-89fb-ecae00c63657",
+      "name": "New Decision",
+      "type": "Macro",
+      "command": true,
+      "runOnStartup": false,
+      "icon": "gavel",
+      "macro": {
+        "name": "New Decision",
+        "id": "c4dd7a32-eca0-4cb4-ba74-ee5578ae5bbc",
+        "commands": [
+          {
+            "name": "new-decision",
+            "type": "UserScript",
+            "id": "74b34347-3d43-42cc-ac2d-8e320c1fa115",
+            "path": "scripts/quickadd/new-decision.js",
+            "settings": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "08ccb762-1786-438f-883f-15212f60d794",
+      "name": "New Information",
+      "type": "Macro",
+      "command": true,
+      "runOnStartup": false,
+      "icon": "lightbulb",
+      "macro": {
+        "name": "New Information",
+        "id": "8a8f98a8-ad2d-452b-bab9-f199051f27fc",
+        "commands": [
+          {
+            "name": "new-information",
+            "type": "UserScript",
+            "id": "f57f13b9-4533-40c7-97c9-ced6f9048f57",
+            "path": "scripts/quickadd/new-information.js",
+            "settings": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "c3044905-73a8-4d4d-a0a9-0dfd4ba04042",
+      "name": "New Journal entry",
+      "type": "Macro",
+      "command": true,
+      "runOnStartup": false,
+      "icon": "calendar-days",
+      "macro": {
+        "name": "New Journal entry",
+        "id": "fc713d79-df72-4dec-8786-75c8aa5069da",
+        "commands": [
+          {
+            "name": "new-journal",
+            "type": "UserScript",
+            "id": "036b85e1-63d5-4b02-9ed0-9a48947cac3c",
+            "path": "scripts/quickadd/new-journal.js",
+            "settings": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": "1a01baec-4499-4d20-adb3-1fbe0f5747f7",
+      "name": "Normalize Action",
+      "type": "Macro",
+      "command": true,
+      "runOnStartup": false,
+      "icon": "sparkles",
+      "macro": {
+        "name": "Normalize Action",
+        "id": "dc219388-90c3-4a49-bc15-154229e9ecb2",
+        "commands": [
+          {
+            "name": "normalize-action",
+            "type": "UserScript",
+            "id": "24f30ce8-7a37-4456-ad68-3ff37dea9471",
+            "path": "scripts/quickadd/normalize-action.js",
+            "settings": {}
+          }
+        ]
+      }
+    }
+  ],
+  "inputPrompt": "single-line",
+  "persistInputPromptDrafts": true,
+  "useSelectionAsCaptureValue": true,
+  "searchNestedChoices": true,
+  "templateFolderLauncherRow": "bottom",
+  "devMode": false,
+  "templateFolderPaths": [
+    "Templates"
+  ],
+  "announceUpdates": "major",
+  "version": "2.22.0",
+  "globalVariables": {},
+  "onePageInputEnabled": false,
+  "disableOnlineFeatures": true,
+  "enableUriCallbacks": false,
+  "enableRibbonIcon": true,
+  "showCaptureNotification": true,
+  "showInputCancellationNotification": false,
+  "enableTemplatePropertyTypes": false,
+  "dateAliases": {
+    "t": "today",
+    "tm": "tomorrow",
+    "yd": "yesterday",
+    "nw": "next week",
+    "nm": "next month",
+    "ny": "next year"
+  },
+  "ai": {
+    "defaultModel": "Ask me",
+    "defaultSystemPrompt": "As an AI assistant within Obsidian, your primary goal is to help users manage their ideas and knowledge more effectively. Format your responses using Markdown syntax. Please use the [[Obsidian]] link format. You can write aliases for the links by writing [[Obsidian|the alias after the pipe symbol]]. To use mathematical notation, use LaTeX syntax. LaTeX syntax for larger equations should be on separate lines, surrounded with double dollar signs ($$). You can also inline math expressions by wrapping it in $ symbols. For example, use $$w_{ij}^{\\text{new}}:=w_{ij}^{\\text{current}}+\\eta\\cdot\\delta_j\\cdot x_{ij}$$ on a separate line, but you can write \"($\\eta$ = learning rate, $\\delta_j$ = error term, $x_{ij}$ = input)\" inline.",
+    "promptTemplatesFolderPath": "",
+    "showAssistant": true,
+    "providers": [
+      {
+        "id": "openai",
+        "name": "OpenAI",
+        "endpoint": "https://api.openai.com/v1",
+        "kind": "openai",
+        "apiKey": "",
+        "models": [
+          {
+            "name": "gpt-5.5",
+            "maxTokens": 1050000,
+            "maxOutputTokens": 128000,
+            "supportsTemperature": false
+          },
+          {
+            "name": "gpt-5.4",
+            "maxTokens": 1050000,
+            "maxOutputTokens": 128000,
+            "supportsTemperature": false
+          },
+          {
+            "name": "gpt-5.4-mini",
+            "maxTokens": 400000,
+            "maxOutputTokens": 128000,
+            "supportsTemperature": false
+          },
+          {
+            "name": "gpt-5.4-nano",
+            "maxTokens": 400000,
+            "maxOutputTokens": 128000,
+            "supportsTemperature": false
+          },
+          {
+            "name": "gpt-4.1",
+            "maxTokens": 1047576,
+            "maxOutputTokens": 32768,
+            "supportsTemperature": true
+          },
+          {
+            "name": "gpt-4.1-mini",
+            "maxTokens": 1047576,
+            "maxOutputTokens": 32768,
+            "supportsTemperature": true
+          },
+          {
+            "name": "gpt-4o",
+            "maxTokens": 128000,
+            "maxOutputTokens": 16384,
+            "supportsTemperature": true
+          },
+          {
+            "name": "gpt-4o-mini",
+            "maxTokens": 128000,
+            "maxOutputTokens": 16384,
+            "supportsTemperature": true
+          },
+          {
+            "name": "o3",
+            "maxTokens": 200000,
+            "maxOutputTokens": 100000,
+            "supportsTemperature": false
+          },
+          {
+            "name": "o4-mini",
+            "maxTokens": 200000,
+            "maxOutputTokens": 100000,
+            "supportsTemperature": false
+          }
+        ],
+        "autoSyncModels": true,
+        "modelSource": "modelsDev"
+      },
+      {
+        "id": "gemini",
+        "name": "Gemini",
+        "endpoint": "https://generativelanguage.googleapis.com",
+        "kind": "gemini",
+        "apiKey": "",
+        "models": [
+          {
+            "name": "gemini-3.5-flash",
+            "maxTokens": 1048576,
+            "maxOutputTokens": 65536,
+            "supportsTemperature": true
+          },
+          {
+            "name": "gemini-3.1-pro-preview",
+            "maxTokens": 1048576,
+            "maxOutputTokens": 65536,
+            "supportsTemperature": true
+          },
+          {
+            "name": "gemini-3.1-flash-lite",
+            "maxTokens": 1048576,
+            "maxOutputTokens": 65536,
+            "supportsTemperature": true
+          },
+          {
+            "name": "gemini-3-pro-preview",
+            "maxTokens": 1048576,
+            "maxOutputTokens": 65536,
+            "supportsTemperature": true
+          },
+          {
+            "name": "gemini-3-flash-preview",
+            "maxTokens": 1048576,
+            "maxOutputTokens": 65536,
+            "supportsTemperature": true
+          },
+          {
+            "name": "gemini-2.5-pro",
+            "maxTokens": 1048576,
+            "maxOutputTokens": 65536,
+            "supportsTemperature": true
+          },
+          {
+            "name": "gemini-2.5-flash",
+            "maxTokens": 1048576,
+            "maxOutputTokens": 65536,
+            "supportsTemperature": true
+          },
+          {
+            "name": "gemini-2.5-flash-lite",
+            "maxTokens": 1048576,
+            "maxOutputTokens": 65536,
+            "supportsTemperature": true
+          }
+        ],
+        "autoSyncModels": true,
+        "modelSource": "modelsDev"
+      }
+    ],
+    "confirmToolCalls": "destructive"
+  },
+  "migrations": {
+    "migrateToMacroIDFromEmbeddedMacro": true,
+    "useQuickAddTemplateFolder": true,
+    "incrementFileNameSettingMoveToDefaultBehavior": true,
+    "consolidateFileExistsBehavior": true,
+    "repairTemplateFileExistsBehavior": true,
+    "mutualExclusionInsertAfterAndWriteToBottomOfFile": true,
+    "setVersionAfterUpdateModalRelease": true,
+    "addDefaultAIProviders": true,
+    "removeMacroIndirection": true,
+    "migrateFileOpeningSettings": true,
+    "backfillFileOpeningDefaults": true,
+    "setProviderModelDiscoveryMode": true,
+    "migrateProviderApiKeysToSecretStorage": true,
+    "migrateToMultipleTemplateFolders": true,
+    "refreshStaleDefaultModelSeeds": true,
+    "pinAiModelRefs": true
+  }
+}

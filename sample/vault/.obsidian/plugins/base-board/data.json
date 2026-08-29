@@ -1,0 +1,16 @@
+{
+  "columnConfigs": {
+    "Actions::Board::Status": {
+      "columns": [
+        "Draft",
+        "Backlog",
+        "Ready",
+        "In progress",
+        "In Review",
+        "Blocked",
+        "Done",
+        "Cancelled"
+      ]
+    }
+  }
+}

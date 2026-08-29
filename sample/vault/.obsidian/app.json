@@ -1,0 +1,9 @@
+{
+  "useMarkdownLinks": true,
+  "newLinkFormat": "relative",
+  "alwaysUpdateLinks": true,
+  "attachmentFolderPath": "attachments",
+  "userIgnoreFilters": [
+    "scripts/"
+  ]
+}

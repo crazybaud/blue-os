@@ -1,0 +1,29 @@
+# ── Blue OS: the framework is versioned, the content is not (by default).
+# Syncing your content with git instead? Delete everything between the
+# SYNC markers, then commit & push (see README → Syncing your content).
+
+# >>> SYNC — content, real-vault Obsidian config, org doctrine
+Actions/
+Decisions/
+Information/
+Journal/
+People/
+/.obsidian/
+/README-*.md
+# <<< SYNC
+
+# Org-specific tooling kept out of the shared framework (example)
+scripts/migration/
+
+# Local state — always ignored, whatever the sync choice
+/.blue-os-version
+/.obsidian/workspace.json
+/.obsidian/workspace-mobile.json
+sample/vault/.obsidian/workspace.json
+sample/vault/.obsidian/workspace-mobile.json
+.trash/
+.DS_Store
+Thumbs.db
+*.sync-conflict-*
+.stfolder/
+.stversions/
