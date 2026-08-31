@@ -21,6 +21,23 @@ migration path.
 
 ---
 
+## 1.1.1 — 2026-08-29
+
+**Changes**
+- The Action template's `# References` section now renders **three separate
+  tables** — Information, Decisions, Related actions — instead of one base
+  with tabbed views. Related actions (dependencies, `Blocked by` targets…)
+  exclude the children (which belong to the `# Actions` table) and the
+  parent (which would leak in through the `Parent` property link).
+- README “Why”, block 3: the kanban board as the arbitration surface for
+  the order of execution (dragging writes `Status` and `kanban_order`
+  straight into the files).
+
+**Migrate your vault**
+- Only if you had already copied the 1.1.0 `# References` block into
+  actions: replace it with the new three-table version from
+  `Templates/Action.md`.
+
 ## 1.1.0 — 2026-08-29
 
 **Changes**

@@ -47,7 +47,11 @@ trackable mutation regime.
 Theory is great, but a system is only as good as its field execution.
 Drawing from years of building products and scaling teams from scratch, the
 OS defines the exact, minimalist structured fields actually required to
-drive an action, frame a decision, or log a journal entry.
+drive an action, frame a decision, or log a journal entry. A kanban board
+sits on top of the actions to arbitrate their order of execution: dragging
+a card across columns or up a column writes the decision straight into the
+files (`Status`, `kanban_order`) — prioritization stays a human call, made
+in one glance.
 
 To keep objects lean, safety and traceability properties are deliberately
 left out of the data model and delegated to the sync tool.
@@ -214,9 +218,9 @@ Body sections:
   creation (LLMs included).
 - **Actions** — right under the Description: embedded base listing the
   sub-actions (delete it on a leaf).
-- **References** — the key Information and the Decisions useful for
-  executing the action: link them anywhere in the file, the embedded base
-  lists them with their freshness and status.
+- **References** — the key Information, the useful Decisions and the
+  related Actions for executing this one: link them anywhere in the file
+  and three separate tables list them, with freshness and status.
 - **Misc** — assorted notes, including implementation suggestions: a
   possible lead, explicitly a suggestion and never a decision nor an order;
   the executor keeps the “how”. Optional.

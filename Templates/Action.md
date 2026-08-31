@@ -42,32 +42,61 @@ views:
 
 # References
 
-<!-- Key Information and useful Decisions for executing this action: link
-them anywhere in this file (body or properties) and they appear here. -->
+<!-- Key Information, useful Decisions and related Actions for executing
+this action: link them anywhere in this file (body or properties) and they
+appear below. -->
+
+**Information**
 
 ```base
 filters:
   and:
     - this.file.hasLink(file)
+    - file.inFolder("Information")
 views:
   - type: table
     name: Information
-    filters:
-      and:
-        - file.inFolder("Information")
     order:
       - Title
       - Confidence
       - Review by
+```
+
+**Decisions**
+
+```base
+filters:
+  and:
+    - this.file.hasLink(file)
+    - file.inFolder("Decisions")
+views:
   - type: table
     name: Decisions
-    filters:
-      and:
-        - file.inFolder("Decisions")
     order:
       - Title
       - Status
       - Date
+```
+
+**Related actions**
+
+<!-- Linked actions (dependencies, Blocked by…) — children and the parent
+are excluded: children live in the "# Actions" table above. -->
+
+```base
+filters:
+  and:
+    - this.file.hasLink(file)
+    - file.inFolder("Actions")
+    - '!Parent.contains(this.file.name)'
+    - '!this.note.Parent.contains(file.name)'
+views:
+  - type: table
+    name: Related actions
+    order:
+      - Title
+      - Status
+      - Owner
 ```
 
 # Misc
