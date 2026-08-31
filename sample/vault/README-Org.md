@@ -25,4 +25,6 @@ boards**: the "Board · Orga" view in `Actions/Actions.base` shows how
 
 ## Our root epics
 
+The tree's single root is [Fulfill the company mission](Actions/Fulfill-the-company-mission.md); list your root epics here:
+
 - …

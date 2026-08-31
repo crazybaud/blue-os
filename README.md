@@ -1,37 +1,56 @@
-# Blue OS — Yet another operating system for your company. Co-edited by humans and LLMs, based on markdown and Obsidian.
+# Blue OS — Yet another enterprise operating system.
 
 Everything an organization knows, decides and does, as versioned
 YAML/Markdown files, co-edited by humans (through Obsidian) and LLMs
-(through git). The framework (folder names, fields, enum values) is in
-English; write the content in your language.
+(through git).
 
 This repository contains **the framework**: the logic, templates, scripts, a
 complete Obsidian configuration and a sample vault. **The content** (your
 real actions, decisions, journal) is not versioned here: it lives in the
-installed vault and syncs with the tool of your choice (Obsidian paid
-plan, iCloud, Git, Syncthing, …). Deep domain
-knowledge (e.g. a medical or scientific knowledge base) belongs in a
-separate repository — out of scope here.
+installed vault, in the language of your choice and syncs with the tool of
+your choice (Obsidian paid plan, iCloud, Git, Syncthing, …).
 
-## Why files?
+## Why
 
-The problem Blue OS tackles: **fluid collaboration between several humans
-and multiple LLMs working in parallel** on the same organizational state.
-Our conviction: this must run on **local file access**, to target the lowest
-possible latency — an agent greps, reads and edits markdown in milliseconds,
-with no API layer in between. The industry converged on the same point for
-code: early versions of Claude Code used RAG with a local vector database,
-but, as Boris Cherny (its creator at Anthropic) put it, “we found pretty
-quickly that agentic search generally works better” — and simpler, without
-the staleness, privacy and reliability issues of a retrieval layer
-([source](https://x.com/bcherny/status/2017824286489383315)). Plain files
-are a first-class way to hand an agent large context. The token economy of
-this approach has not been studied yet.
+**1. The Human-AI Sync & The File-First Bet**
 
-The data model builds on the classic separation of what an organization
-handles into three objects — **information** (what we know), **decision**
-(what we chose), **action** (what we do) — each with its own mutation
-regime, completed here by the raw stream (Journal) and the actors (People).
+At its core, Blue OS tackles a specific problem: getting humans and multiple
+LLM agents to collaborate fluidly on the exact same organizational state.
+
+Our conviction is that we must run on local file access to reach the lowest
+possible latency and to collaborate with LLMs. To be noted, as Anthropic's
+[Boris Cherny](https://x.com/bcherny/status/2017824286489383315) put it,
+“we found pretty quickly that agentic search generally works better” — it
+bypasses the staleness, privacy headaches, and reliability issues of
+standard RAG. Feeding agents with plain, structured files is simply a
+first-class way to hand them massive, accurate context.
+
+**2. The Data Model: Strategy Meets Distributed Systems**
+
+To make this work, the system separates the organizational load into three
+fundamental objects: **Information** (what we know), **Decision** (what we
+chose), and **Action** (what we do). We didn't invent this split — it's
+hardwired into strategic frameworks, from
+[Herbert Simon's decision-making stages](https://en.wikipedia.org/wiki/Decision-making#Herbert_Simon's_stages)
+to [John Boyd's OODA loop](https://en.wikipedia.org/wiki/OODA_loop) for
+operating under uncertainty.
+
+But we turn this theory into a functioning OS by adding a raw event stream
+(**Journal**) and autonomous nodes (**People**). People is basically
+applying distributed architecture principles (like
+[Hewitt's Actor Model](https://en.wikipedia.org/wiki/Actor_model)) to human
+and LLM management. Every object gets its own autonomous, asynchronous, and
+trackable mutation regime.
+
+**3. Pragmatic Execution**
+
+Theory is great, but a system is only as good as its field execution.
+Drawing from years of building products and scaling teams from scratch, the
+OS defines the exact, minimalist structured fields actually required to
+drive an action, frame a decision, or log a journal entry.
+
+To keep objects lean, safety and traceability properties are deliberately
+left out of the data model and delegated to the sync tool.
 
 ## Install
 
@@ -69,65 +88,12 @@ they are separate folders:
 **Fractal actions.**
 No project/task distinction. One object, one schema; an “epic” is simply an
 action with children (the `Parent` field). Views do the sorting, not types.
+An action always has a parent: the tree has a single root, the company's
+mission — walking up any `Parent` chain must end there.
 
 **One grammar for humans and LLMs.**
 Every word has exactly one meaning (e.g. `Journal/` is the organizational
-stream; the dated thread inside an action is called `## Historique`).
-
-## The workflow
-
-### Where things live — the five spaces
-
-The vault is the OS: it **orchestrates**, it does not store. Deliverables
-live in their space; the vault keeps only the pointer (an Information).
-Golden rule inherited from the spaces: **blob → Drive, text → git.**
-
-| Space | Nature | What lives there |
-|---|---|---|
-| Git workspace | Git only | The repositories: code, ontology, this framework |
-| Shared drive | Team drive (default) | Every office document of the company: product, design, marketing, decks, day-to-day finance, signed legal |
-| Confidential pocket | Founder-scoped drive | The not-readable-by-default: legal under negotiation, disputes, PERSONNEL folders — shared folder by folder, by name |
-| Local | Never synced | The antechamber (to triage) and the off-cloud |
-| Regulated systems | Certified hosting | Data under a legal regime (e.g. real patient data) — only there, never elsewhere |
-
-### The daily routine — six gestures
-
-1. **Capture a task**: `+` on the Board (burst of titles), then `⌘⇧B`
-   normalizes the batch. For a deliberate creation: `⌘⇧A`.
-2. **Coming out of a meeting or call**: `⌘⇧J` → raw notes → from the open
-   entry, extract (`⌘⇧A` / `⌘⇧D` / `⌘⇧I`, backlinks pre-filled) → set
-   `Processed: true`. The minutes stay raw forever; their value lives in the
-   extracted objects.
-3. **Set down a reflection**: `⌘⇧J`, `Kind: Reflexion`, with thematic tags —
-   a dated, write-once snapshot of thought; the Journal's “Reflexions” view
-   lets you re-read a theme in one pass.
-4. **Work on an action**: everything goes in its `## Historique` — links,
-   discussions, local decisions. Never a Journal entry for work on an action.
-5. **Enact a decision**: its scope outlives the current action → `⌘⇧D`;
-   otherwise → the action's Historique.
-6. **Learn something durable**: `⌘⇧I` — a fact, a pointer to a deliverable,
-   or a list (see the three forms in the Information schema).
-
-### Routing an item — the decision tree
-
-Facing something to file, one question at a time:
-
-1. Is it an office document (docx, xlsx, pdf, deck)? → It lives in the
-   Drive (shared drive by default, confidential pocket if a nameable
-   constraint applies). If it must be findable from the OS → an
-   Information-pointer references it.
-2. Is it code or versioned text? → A repository. Durable reference →
-   Information-pointer.
-3. Is it something to do? → **Action** (via the Board for quick capture).
-4. Is it an enacted choice? → Scope beyond the current action → **Decision**;
-   otherwise → the relevant action's Historique.
-5. Is it durable, qualified knowledge? → **Information** (fact, pointer or
-   list).
-6. Is it something that happened or was said — or a dated thought? →
-   **Journal** (Meeting, News, Reflexion, Email, Misc).
-7. Is it an actor? → **People**.
-8. None of the above, or no time to decide? → the local antechamber, to be
-   re-triaged — never force anything into the wrong object.
+stream; the dated thread inside an action is called `## History`).
 
 ## Conventions
 
@@ -142,7 +108,7 @@ Facing something to file, one question at a time:
   Title plugin), and a title can evolve without renaming as long as the
   slug does not become misleading. The identity for any external reference
   is the `Id`, never the path (a setup decision recorded in the setup
-  action's Historique).
+  action's History).
 - **Properties**: leading capital (`Status`, `Effort`, `Due`…).
 - **Ids**: stable machine identifier (`act-0001`, `dec-0002`, `info-0003`,
   `ppl-0004`), unique across the whole repo, survives any rename.
@@ -232,7 +198,7 @@ grid”).
 | `Title` | string | Verb + complement, very short |
 | `Status` | enum | `Draft` (captured idea, spec to write — the triage column) · `Backlog` (specified, not scheduled) · `Ready` (startable now) · `In progress` · `Blocked` (see `Blocked reason`) · `In Review` (awaiting the `Reviewers`) · `Done` · `Cancelled` |
 | `Owner` | link | A `People/` entry (human or LLM), accountable |
-| `Parent` | link | Parent action; empty for a root. An action with children is an “epic” |
+| `Parent` | link | Parent action — mandatory; the only action without one is the mission, the single root of the tree. An action with children is an “epic” |
 | `Effort` | enum | Anticipated load, in human time: `XS` <1 h · `S` <½ day · `M` <2 days · `L` <1 week · `XL` way bigger |
 | `Due` | date | Deadline, optional |
 | `Blocked by` | links | Blocking actions |
@@ -248,12 +214,15 @@ Body sections:
   creation (LLMs included).
 - **Actions** — right under the Description: embedded base listing the
   sub-actions (delete it on a leaf).
+- **References** — the key Information and the Decisions useful for
+  executing the action: link them anywhere in the file, the embedded base
+  lists them with their freshness and status.
 - **Misc** — assorted notes, including implementation suggestions: a
   possible lead, explicitly a suggestion and never a decision nor an order;
   the executor keeps the “how”. Optional.
 - **Critères d'acceptation** — the done criterion as an observable
   checklist. Always filled at creation (LLMs included).
-- **Historique** — dated entries, the action's logbook. This is where
+- **History** — dated entries, the action's logbook. This is where
   decisions whose scope does not outlive the action go (see the guardrail in
   the Decision section) and the work discussions on the action (links
   included) — no Journal entry for that.
@@ -275,16 +244,16 @@ never edited.
 **Is one ✓**: the Obsidian + GitHub stack · “Start with a single morning
 slot” (commits three organizations) — scope beyond one action.
 **Is not one ✗**: the choice of a plugin or a setting → the relevant
-action's Historique · a conviction not yet enacted → Reflexion in the
+action's History · a conviction not yet enacted → Reflexion in the
 Journal · “we'll revisit if demand exceeds 8/month” → a Consequence of an
 existing decision, not one more decision.
 
 **Guardrail — ADR or Historique?** The test is **scope**. A decision only
-deserves to exist outside an action's Historique if its scope outlives the
+deserves to exist outside an action's History if its scope outlives the
 current action — if it will constrain people or work that will never have
 that action in front of them. The question to ask: “who will need to know
 this decision without ever opening this action?” Someone → ADR. No one →
-the relevant action's Historique, however important or costly the decision
+the relevant action's History, however important or costly the decision
 looks (importance does not make scope; a costly one-way door local to the
 action stays in its Historique). LLMs included — and especially LLMs: do
 not create an ADR for every micro-choice; when in doubt, it is the
@@ -366,12 +335,12 @@ in series — the “Reflexions” view exists for that.
 **Is one ✓**: the minutes of the partner meeting (Meeting) · “The regulator
 publishes a new guideline” (News) · “Where I stand on pricing” (Reflexion,
 tagged Growth) · a received email that is an event, quoted verbatim (Email).
-**Is not one ✗**: work notes on an ongoing action → its `## Historique` ·
+**Is not one ✗**: work notes on an ongoing action → its `## History` ·
 durable qualified knowledge → Information · a received document → Drive
 (+ Information-pointer if needed).
 
 **Rule — Journal or action Historique?** A work discussion held within an
-ongoing action is recorded in that action's Historique (links included), not
+ongoing action is recorded in that action's History (links included), not
 as a Journal entry — otherwise the Journal drowns the signal. The Journal
 captures what happens outside the thread of actions: meetings, external
 news, events.
@@ -426,7 +395,62 @@ provider engaged as a structure).
 | `Work preference` | text | Preferred way of working, free text: document by email, shared Google Doc, WhatsApp, PR in the repo… |
 | `Tags` | list | Free classification (actor families: Founder, Agent, Partner, Investor…) |
 
-## Tooling
+## The workflow
+
+### Where things live — the five spaces
+
+The vault is the OS: it **orchestrates**, it does not store. Deliverables
+live in their space; the vault keeps only the pointer (an Information).
+Golden rule inherited from the spaces: **blob → Drive, text → git.**
+
+| Space | Nature | What lives there |
+|---|---|---|
+| Git workspace | Git only | The repositories: code, ontology, this framework |
+| Shared drive | Team drive (default) | Every office document of the company: product, design, marketing, decks, day-to-day finance, signed legal |
+| Confidential pocket | Founder-scoped drive | The not-readable-by-default: legal under negotiation, disputes, PERSONNEL folders — shared folder by folder, by name |
+| Local | Never synced | The antechamber (to triage) and the off-cloud |
+| Regulated systems | Certified hosting | Data under a legal regime (e.g. real patient data) — only there, never elsewhere |
+
+### The daily routine — six gestures
+
+1. **Capture a task**: `+` on the Board (burst of titles), then `⌘⇧B`
+   normalizes the batch. For a deliberate creation: `⌘⇧A`.
+2. **Coming out of a meeting or call**: `⌘⇧J` → raw notes → from the open
+   entry, extract (`⌘⇧A` / `⌘⇧D` / `⌘⇧I`, backlinks pre-filled) → set
+   `Processed: true`. The minutes stay raw forever; their value lives in the
+   extracted objects.
+3. **Set down a reflection**: `⌘⇧J`, `Kind: Reflexion`, with thematic tags —
+   a dated, write-once snapshot of thought; the Journal's “Reflexions” view
+   lets you re-read a theme in one pass.
+4. **Work on an action**: everything goes in its `## History` — links,
+   discussions, local decisions. Never a Journal entry for work on an action.
+5. **Enact a decision**: its scope outlives the current action → `⌘⇧D`;
+   otherwise → the action's History.
+6. **Learn something durable**: `⌘⇧I` — a fact, a pointer to a deliverable,
+   or a list (see the three forms in the Information schema).
+
+### Routing an item — the decision tree
+
+Facing something to file, one question at a time:
+
+1. Is it an office document (docx, xlsx, pdf, deck)? → It lives in the
+   Drive (shared drive by default, confidential pocket if a nameable
+   constraint applies). If it must be findable from the OS → an
+   Information-pointer references it.
+2. Is it code or versioned text? → A repository. Durable reference →
+   Information-pointer.
+3. Is it something to do? → **Action** (via the Board for quick capture).
+4. Is it an enacted choice? → Scope beyond the current action → **Decision**;
+   otherwise → the relevant action's History.
+5. Is it durable, qualified knowledge? → **Information** (fact, pointer or
+   list).
+6. Is it something that happened or was said — or a dated thought? →
+   **Journal** (Meeting, News, Reflexion, Email, Misc).
+7. Is it an actor? → **People**.
+8. None of the above, or no time to decide? → the local antechamber, to be
+   re-triaged — never force anything into the wrong object.
+
+## Quick reference
 
 ### Creation wizards
 
@@ -454,48 +478,18 @@ A sixth command, **Sync filename to Title**, renames the active file to its
 `Title`'s slug (through Obsidian's native rename: all links follow). Useful
 only when the old slug has become misleading.
 
-### Plugins
+The four bundled plugins that power all of this (pinned versions, licenses,
+policy) are detailed in [INSTALL.md](INSTALL.md).
 
-Approved community plugins, versions pinned in git
-(`sample/vault/.obsidian/plugins/`, licenses bundled — see
-`THIRD-PARTY-LICENSES.md`):
+## Human × LLM co-editing
 
-- **Front Matter Title 4.1.1** — displays `Title` instead of the file name
-  everywhere in Obsidian (explorer, tabs, graph, search, backlinks…).
-- **QuickAdd 2.22.0** — the wizards above. User scripts live in `scripts/`
-  — the folder MUST stay unhidden (no leading dot): QuickAdd loads scripts
-  through the vault index, which ignores hidden folders. It is hidden from
-  the UI instead: Excluded files (`app.json`) + an explorer rule in the CSS
-  snippet.
-- **Colored Tags 6.1.3** — automatically colors tags (nested tags blend
-  their color with the root tag's), text contrast guaranteed WCAG AA.
-- **Base Board 2.5.1** — kanban view for Bases (the “Board” view in
-  `Actions.base`): drag across columns → writes `Status` into the
-  frontmatter; vertical drag → manual priority written into `kanban_order`.
-  One dataset (the files), several representations — no parallel
-  markdown-kanban board. Quick capture Pivotal-style: type titles in bursts
-  at the columns' `+` (the schema skeleton is set by `newItemProperties` in
-  the view), then a single Normalize Action (`⌘⇧B`,
-  `scripts/quickadd/normalize-action.js`) normalizes the whole batch — each
-  Id-less action receives its Id, its Title, the body sections and its
-  canonical slug. Already-conforming actions are untouched. For a complete
-  one-gesture creation, `⌘⇧A`.
+Everything is `.md` + YAML: an LLM agent reads the index, creates conforming
+objects (same templates, same link and Id rules), appends to Historique
+sections, and a validation script can check frontmatter, enums, Id
+uniqueness and link resolution. The `Draft` status is the airlock: the agent
+proposes, the human triages on the board.
 
-Hiding empty properties does not go through a plugin: the versioned snippet
-`properties.css` handles it (empty fields hidden, reappearing when the
-panel gets focus). Folding the Properties block is native (chevron, “Toggle
-fold properties” command).
+## Deferred
 
-**Policy**: a community plugin is executable third-party code — keep it low. Adopting a plugin is recorded in the relevant action's
-Historique, not as an ADR: the current state lives in this README section,
-the reasoning in the Historique — nobody needs a Decision file for that.
-
-## Deferred (recorded, not implemented)
-
-- **Prioritization.** Intuition: `Priority ≈ Impact × Urgency / Effort`,
-  without making it a rigid formula. Impact = value if done (Critical, High,
-  Medium, Low); Urgency = cost of waiting; Priority = the managerial call on
-  execution order (Low, Normal, High, Critical). To be added when the volume
-  of actions demands it.
-- **Schema validation in CI** — lint frontmatter, enums, Id uniqueness,
-  link resolution, registry membership.
+Topics recorded for later — prioritization, schema validation in CI, the
+token-economy study — live in **[ROADMAP.md](ROADMAP.md)**.

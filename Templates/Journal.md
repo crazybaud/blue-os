@@ -10,7 +10,7 @@ Raw notes. Write-once: an entry is never edited afterwards — its value is
 extracted to Actions/, Decisions/ or Information/, then `Processed: true`.
 
 <!-- Rule: a work discussion held within an ongoing action is recorded in
-that action's Historique (links included), NOT here — otherwise the Journal
+that action's History (links included), NOT here — otherwise the Journal
 drowns the signal. The Journal captures what happens outside the thread of
 actions: meetings, news, events. -->
 

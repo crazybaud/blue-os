@@ -3,7 +3,7 @@ Id: act-XXXX
 Title: Verb + complement, very short
 Status: Backlog      # Draft | Backlog | Ready | In progress | Blocked | In Review | Done | Cancelled
 Owner: ""
-Parent: ""
+Parent: ""           # mandatory — every action attaches to the tree; the single root is the company mission
 Effort: L            # XS <1h | S <½day | M <2days | L <1week | XL way bigger
 Due: ""
 Blocked by: []
@@ -40,6 +40,36 @@ views:
       - Due
 ```
 
+# References
+
+<!-- Key Information and useful Decisions for executing this action: link
+them anywhere in this file (body or properties) and they appear here. -->
+
+```base
+filters:
+  and:
+    - this.file.hasLink(file)
+views:
+  - type: table
+    name: Information
+    filters:
+      and:
+        - file.inFolder("Information")
+    order:
+      - Title
+      - Confidence
+      - Review by
+  - type: table
+    name: Decisions
+    filters:
+      and:
+        - file.inFolder("Decisions")
+    order:
+      - Title
+      - Status
+      - Date
+```
+
 # Misc
 
 Assorted notes — notably the **implementation suggestions**: a possible
@@ -50,11 +80,10 @@ executor keeps control of the "how".
 
 - [ ] Observable result 1
 - [ ] The result is visible/usable by …
-- [ ] Follow-up recorded in the Historique, links up to date
+- [ ] Follow-up recorded in the History, links up to date
 - [ ] …
 
-# Historique
-
+# History
 <!-- The action's logbook, as dated entries. Decisions whose scope stays
 inside this action are recorded here — not as an ADR.
 Description and Critères d'acceptation are ALWAYS filled at creation. -->

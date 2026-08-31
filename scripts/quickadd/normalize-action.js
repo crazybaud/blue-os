@@ -102,7 +102,7 @@ module.exports = async (params) => {
   }
 
   // Template body, fetched once
-  let tplBody = `# Description\n\n# Misc\n\n# Critères d'acceptation\n\n- [ ] …\n\n# Historique\n\n- ${today} — Normalized.\n`;
+  let tplBody = `# Description\n\n# Misc\n\n# Critères d'acceptation\n\n- [ ] …\n\n# History\n\n- ${today} — Normalized.\n`;
   const tpl = app.vault.getAbstractFileByPath("Templates/Action.md");
   if (tpl) {
     tplBody = (await app.vault.cachedRead(tpl))

@@ -94,3 +94,39 @@ writes conforming files directly through git):
    `Work preference`.
 6. Edit: on a branch, then pull request (or your sync tool's review
    equivalent). The main line is protected — what lands there is enacted.
+
+## Plugins
+
+Approved community plugins, versions pinned in git
+(`sample/vault/.obsidian/plugins/`, licenses bundled — see
+`THIRD-PARTY-LICENSES.md`):
+
+- **Front Matter Title 4.1.1** — displays `Title` instead of the file name
+  everywhere in Obsidian (explorer, tabs, graph, search, backlinks…).
+- **QuickAdd 2.22.0** — the creation wizards (see the README's Quick reference). User scripts live in `scripts/`
+  — the folder MUST stay unhidden (no leading dot): QuickAdd loads scripts
+  through the vault index, which ignores hidden folders. It is hidden from
+  the UI instead: Excluded files (`app.json`) + an explorer rule in the CSS
+  snippet.
+- **Colored Tags 6.1.3** — automatically colors tags (nested tags blend
+  their color with the root tag's), text contrast guaranteed WCAG AA.
+- **Base Board 2.5.1** — kanban view for Bases (the “Board” view in
+  `Actions.base`): drag across columns → writes `Status` into the
+  frontmatter; vertical drag → manual priority written into `kanban_order`.
+  One dataset (the files), several representations — no parallel
+  markdown-kanban board. Quick capture Pivotal-style: type titles in bursts
+  at the columns' `+` (the schema skeleton is set by `newItemProperties` in
+  the view), then a single Normalize Action (`⌘⇧B`,
+  `scripts/quickadd/normalize-action.js`) normalizes the whole batch — each
+  Id-less action receives its Id, its Title, the body sections and its
+  canonical slug. Already-conforming actions are untouched. For a complete
+  one-gesture creation, `⌘⇧A`.
+
+Hiding empty properties does not go through a plugin: the versioned snippet
+`properties.css` handles it (empty fields hidden, reappearing when the
+panel gets focus). Folding the Properties block is native (chevron, “Toggle
+fold properties” command).
+
+**Policy**: a community plugin is executable third-party code — keep it low. Adopting a plugin is recorded in the relevant action's
+Historique, not as an ADR: the current state lives in this README section,
+the reasoning in the History — nobody needs a Decision file for that.

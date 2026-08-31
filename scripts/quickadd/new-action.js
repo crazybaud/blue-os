@@ -21,7 +21,7 @@ const FALLBACK_BODY = `
 
 - [ ] …
 
-# Historique
+# History
 `;
 
 module.exports = async (params) => {
