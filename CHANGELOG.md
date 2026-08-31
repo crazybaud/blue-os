@@ -21,6 +21,32 @@ migration path.
 
 ---
 
+## 2.0.0 — 2026-08-29
+
+**Breaking change: `Blocked` is no longer a Status.**
+Blocking is a **field**, orthogonal to the stage: an action stays in its
+real column (`Backlog`, `In progress`…) and is flagged blocked by filling
+`Blocked by` (multi-entry links) and/or `Blocked reason`. The board shows a
+⛔ on the card wherever it stands (new `Blocked` formula in `Actions.base`),
+the kanban loses its `Blocked` column, and the “Blocked” table view now
+filters on the fields instead of the status.
+
+**Changes**
+- `Status` enum: `Draft · Backlog · Ready · In progress · In Review · Done ·
+  Cancelled` (template, README, sample board).
+- `Actions.base`: `Blocked` formula
+  (`if(!note["Blocked by"].isEmpty() || note["Blocked reason"] != "", "⛔", "")`)
+  displayed on every kanban card; `Blocked` column removed; “Blocked” view
+  refiltered.
+
+**Migrate your vault**
+- Re-status your blocked actions to their real stage, keeping the fields:
+  for each file with `Status: Blocked`, set the underlying status (usually
+  `Backlog` or `In progress`) and make sure `Blocked by` or
+  `Blocked reason` is filled.
+- Update your `Actions/Actions.base` from the sample (formula, columns,
+  view), or re-copy it if you had not customized it.
+
 ## 1.1.1 — 2026-08-29
 
 **Changes**

@@ -200,7 +200,7 @@ grid”).
 |---|---|---|
 | `Id` | string | `act-NNNN`, stable |
 | `Title` | string | Verb + complement, very short |
-| `Status` | enum | `Draft` (captured idea, spec to write — the triage column) · `Backlog` (specified, not scheduled) · `Ready` (startable now) · `In progress` · `Blocked` (see `Blocked reason`) · `In Review` (awaiting the `Reviewers`) · `Done` · `Cancelled` |
+| `Status` | enum | `Draft` (captured idea, spec to write — the triage column) · `Backlog` (specified, not scheduled) · `Ready` (startable now) · `In progress` · `In Review` (awaiting the `Reviewers`) · `Done` · `Cancelled`. Blocking is carried by `Blocked by`/`Blocked reason`, not by a status — the board shows ⛔ |
 | `Owner` | link | A `People/` entry (human or LLM), accountable |
 | `Parent` | link | Parent action — mandatory; the only action without one is the mission, the single root of the tree. An action with children is an “epic” |
 | `Effort` | enum | Anticipated load, in human time: `XS` <1 h · `S` <½ day · `M` <2 days · `L` <1 week · `XL` way bigger |

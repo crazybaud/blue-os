@@ -1,12 +1,12 @@
 ---
 Id: act-XXXX
 Title: Verb + complement, very short
-Status: Backlog      # Draft | Backlog | Ready | In progress | Blocked | In Review | Done | Cancelled
+Status: Backlog      # Draft | Backlog | Ready | In progress | In Review | Done | Cancelled
 Owner: ""
 Parent: ""           # mandatory — every action attaches to the tree; the single root is the company mission
 Effort: L            # XS <1h | S <½day | M <2days | L <1week | XL way bigger
 Due: ""
-Blocked by: []
+Blocked by: []       # blocking is a field, not a status: fill this (and/or Blocked reason) and the board shows ⛔
 Blocked reason: ""
 Reviewers: []
 Tags: []
