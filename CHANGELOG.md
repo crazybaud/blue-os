@@ -21,6 +21,35 @@ migration path.
 
 ---
 
+## 1.1.0 — 2026-08-29
+
+**Changes**
+- **`# Historique` → `# History`**: the action/decision logbook section is
+  now named in English, across templates, sample, wizards and docs.
+- **New `# References` section** in the Action template: an embedded base
+  listing the key Information (with freshness) and the useful Decisions
+  (with status) that the action links to — link a file anywhere in the
+  action and it appears there.
+- **Parent is mandatory**: every action attaches to the tree; the single
+  root is the company mission (the sample now ships a
+  `Fulfill the company mission` root, and both hello-world actions attach
+  to it).
+- README reworked: new opening and "Why" section (the file-first bet, the
+  information/decision/action lineage, pragmatic execution), workflow moved
+  after the schemas, "Tooling" renamed "Quick reference", plugin details
+  moved to `INSTALL.md`, deferred topics moved to `ROADMAP.md` (which gains
+  the LLM plug-in manual, the permission review process, and the
+  token-saving work).
+
+**Migrate your vault**
+- Rename the section in your existing content:
+  `grep -rl '^# Historique' --include='*.md' . | xargs sed -i '' 's/^# Historique$/# History/'`
+  (drop the `''` after `-i` on Linux).
+- Optionally add the `# References` base to actions where it helps (new
+  actions get it from the template).
+- Create your mission action if you do not have one, and re-parent your
+  root epics to it.
+
 ## 1.0.0 — 2026-08-29
 
 Initial public release.
