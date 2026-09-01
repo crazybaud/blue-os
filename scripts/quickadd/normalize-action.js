@@ -73,6 +73,19 @@ module.exports = async (params) => {
     const m = typeof par === "string" && /\[\[([^\]]+)\]\]/.exec(par);
     if (m) parentNames.add(m[1]);
   }
+  // Pass 2b — Breadcrumbs display alias. Kept in sync on every run:
+  // "act-0123 · Title · Status" (the tree shows the alias instead of the slug).
+  let aliasesSynced = 0;
+  for (const f of actionFiles) {
+    const fm = app.metadataCache.getFileCache(f)?.frontmatter ?? {};
+    if (!fm.Id || !fm.Title || !fm.Status) continue;
+    const want = `${fm.Id} · ${fm.Title} · ${fm.Status}`;
+    const cur = Array.isArray(fm.aliases) ? fm.aliases[0] : fm.aliases;
+    if (cur === want) continue;
+    await app.fileManager.processFrontMatter(f, (front) => { front.aliases = [want]; });
+    aliasesSynced++;
+  }
+
   let tablesAdded = 0;
   for (const f of actionFiles) {
     if (!parentNames.has(f.basename)) continue;
@@ -96,7 +109,8 @@ module.exports = async (params) => {
   }
   if (toFix.length === 0) {
     notice([fixedLinks && `property links fixed in ${fixedLinks} file(s)`,
-            tablesAdded && `children table added to ${tablesAdded} parent(s)`]
+            tablesAdded && `children table added to ${tablesAdded} parent(s)`,
+            aliasesSynced && `${aliasesSynced} alias(es) refreshed`]
             .filter(Boolean).join(" — ") || "Nothing to normalize — every action has an Id.");
     return;
   }
@@ -130,7 +144,7 @@ module.exports = async (params) => {
 
     const slug = slugify(fm.Title);
     const dir = file.parent && file.parent.path !== "/" ? `${file.parent.path}/` : "";
-    const newPath = `${dir}${slug}.md`;
+    const newPath = `${dir}${fm.Id}-${slug}.md`;
     if (slug && newPath !== file.path && !app.vault.getAbstractFileByPath(newPath)) {
       await app.fileManager.renameFile(file, newPath);
     }
@@ -138,5 +152,6 @@ module.exports = async (params) => {
   }
   notice(`${ids.length} action(s) normalized: ${ids.join(", ")}`
     + (fixedLinks ? ` — property links fixed in ${fixedLinks} file(s)` : "")
-    + (tablesAdded ? ` — children table added to ${tablesAdded} parent(s)` : ""));
+    + (tablesAdded ? ` — children table added to ${tablesAdded} parent(s)` : "")
+    + (aliasesSynced ? ` — ${aliasesSynced} alias(es) refreshed` : ""));
 };

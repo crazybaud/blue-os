@@ -73,7 +73,7 @@ Tags: [${tags.join(", ")}]
 
 `;
 
-  const path = `Information/${slug}.md`;
+  const path = `Information/${id}-${slug}.md`;
   if (app.vault.getAbstractFileByPath(path)) { notice(`Already exists: ${path}`); return; }
   const file = await app.vault.create(path, frontmatter);
   await app.workspace.getLeaf(false).openFile(file);

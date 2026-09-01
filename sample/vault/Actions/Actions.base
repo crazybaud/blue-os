@@ -1,0 +1,141 @@
+filters:
+  and:
+    - file.inFolder("Actions")
+    - file.ext == "md"
+formulas:
+  Open: link(file.name, "↗")
+  Blocked: 'if(!note["Blocked by"].isEmpty() || note["Blocked reason"] != "", "⛔", "")'
+properties:
+  formula.Open:
+    displayName: ↗
+views:
+  - type: kanban
+    name: Board
+    groupBy:
+      property: Status
+      direction: ASC
+    order:
+      - formula.Blocked
+      - Effort
+      - Due
+      - tags
+    cardTitleProperty: Title
+    newItemProperties:
+      Id: ""
+      Title: ""
+      Owner: "[[ppl-0001-Alice]]"
+      Parent: ""
+      Effort: L
+      Due: ""
+      Blocked by: []
+      Blocked reason: ""
+      Reviewers: []
+      Tags: []
+    boardColumns:
+      - Draft
+      - Backlog
+      - Ready
+      - In progress
+      - In Review
+      - Done
+      - Cancelled
+  - type: kanban
+    name: Board · Orga
+    filters:
+      and:
+        - file.hasTag("Orga")
+    groupBy:
+      property: Status
+      direction: ASC
+    cardTitleProperty: Title
+    boardColumns:
+      - Draft
+      - Backlog
+      - In progress
+      - Done
+    collapsedColumns:
+      Blocked: true
+      In Review: true
+      Cancelled: true
+      Draft: true
+    columnColors:
+      Done: "#11e30d"
+      Ready: "#378cfb"
+  - type: table
+    name: Operational
+    filters:
+      and:
+        - Status != "Done"
+        - Status != "Cancelled"
+        - file.hasTag("Orga")
+    order:
+      - Title
+      - formula.Open
+      - Status
+      - Owner
+      - Effort
+      - Due
+      - Tags
+      - Parent
+    sort:
+      - property: Effort
+        direction: DESC
+      - property: Due
+        direction: ASC
+    columnSize:
+      formula.Open: 40
+      note.Owner: 89
+      note.Effort: 58
+      note.Due: 107
+  - type: table
+    name: Blocked
+    filters:
+      and:
+        - '!note["Blocked by"].isEmpty() || note["Blocked reason"] != ""'
+    order:
+      - Title
+      - formula.Open
+      - Blocked reason
+      - Owner
+      - Due
+    columnSize:
+      formula.Open: 40
+  - type: table
+    name: In review
+    filters:
+      and:
+        - Status == "In Review"
+    order:
+      - Title
+      - formula.Open
+      - Reviewers
+      - Owner
+      - Due
+    columnSize:
+      formula.Open: 40
+  - type: table
+    name: Epics
+    filters:
+      and:
+        - Effort == "XL"
+    order:
+      - Title
+      - formula.Open
+      - Status
+      - Owner
+      - Due
+    columnSize:
+      formula.Open: 40
+  - type: table
+    name: All
+    order:
+      - Title
+      - formula.Open
+      - Status
+      - Owner
+      - Effort
+      - Due
+      - Tags
+      - Parent
+    columnSize:
+      formula.Open: 40

@@ -1,0 +1,36 @@
+filters:
+  and:
+    - file.inFolder("Information")
+    - file.ext == "md"
+formulas:
+  Open: link(file.name, "↗")
+properties:
+  formula.Open:
+    displayName: "↗"
+views:
+  - type: table
+    name: All
+    order:
+      - Title
+      - formula.Open
+      - Confidence
+      - Tags
+      - Review by
+    sort:
+      - property: Collected
+        direction: DESC
+    columnSize:
+      formula.Open: 40
+  - type: table
+    name: By freshness
+    order:
+      - Title
+      - formula.Open
+      - Review by
+      - Confidence
+      - Tags
+    sort:
+      - property: Review by
+        direction: ASC
+    columnSize:
+      formula.Open: 40

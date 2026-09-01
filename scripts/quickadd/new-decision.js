@@ -81,7 +81,7 @@ Decided by: [${deciders.map((x) => `"[[${x}]]"`).join(", ")}]
 Supersedes: ${supersedes ? `"[[${supersedes}]]"` : '""'}
 ---`;
 
-  const path = `Decisions/${slug}.md`;
+  const path = `Decisions/${id}-${slug}.md`;
   if (app.vault.getAbstractFileByPath(path)) { notice(`Already exists: ${path}`); return; }
   const file = await app.vault.create(path, frontmatter + body);
   await app.workspace.getLeaf(false).openFile(file);

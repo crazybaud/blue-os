@@ -21,6 +21,42 @@ migration path.
 
 ---
 
+## 3.0.0 — 2026-08-31
+
+**Breaking change: file names now start with the object's Id.**
+`act-0012-Turn-off-the-legacy-wiki.md`, `dec-0002-…`, `info-…`, `ppl-…` —
+every listing, link and diff becomes self-identifying. Journal entries keep
+their date prefix. The wizards (create, `⌘⇧B` Normalize, Sync filename)
+produce the new names and the validator enforces them.
+
+**Changes**
+- **Breadcrumbs 4.21.11 bundled** (MIT, actively maintained, Obsidian
+  1.13+): `Parent` is declared as the ascending edge, implied `Children`
+  edges unroll the descendance — recursive action tree in the lateral Tree
+  view and in note bodies via the ```breadcrumbs codeblock (shipped in the
+  Action template and the sample mission). Complete `data.json` provided.
+- **Display aliases**: every action carries
+  `aliases: ["act-XXXX · Title · Status"]`, shown in Breadcrumbs trees;
+  created by `⌘⇧A`, kept in sync by `⌘⇧B`.
+- Plugin policy reworded (no numeric cap: avoid piling them up).
+- **Fix**: unanchored `.gitignore` patterns were also ignoring
+  `sample/vault/` objects — fresh clones shipped a sample without its
+  hello-world content and `.base` views. Patterns are now root-anchored and
+  the sample files are versioned.
+
+**Migrate your vault**
+- Rename your object files with their Id prefix and rewrite the links. From
+  the vault root, a script along these lines (test on a copy first):
+  build the mapping `old-stem → "<Id>-<old-stem>"` by reading each file's
+  `Id:` line in Actions/, Decisions/, Information/ and People/, rename the
+  files, then rewrite `[[old-stem]]` and `old-stem.md` occurrences across
+  all `.md` and `.base` files.
+- Copy the new `scripts/quickadd/` and `Templates/Action.md`, and the
+  `sample/vault/.obsidian/plugins/breadcrumbs/` folder into your vault's
+  plugins; add `"breadcrumbs"` to `community-plugins.json`; restart
+  Obsidian (a full quit — the plugin reads its config at load).
+- Run `⌘⇧B` once to generate the display aliases.
+
 ## 2.0.0 — 2026-08-29
 
 **Breaking change: `Blocked` is no longer a Status.**

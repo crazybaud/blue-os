@@ -18,7 +18,7 @@ cp "$SRC/VERSION" "$TARGET/.blue-os-version"
 cat <<MSG
 Vault ready in: $TARGET
 1. Obsidian → "Open folder as vault" → this folder
-2. Settings → Community plugins → "Turn off restricted mode", then reload (Cmd+R) — the 4 bundled plugins (QuickAdd, Front Matter Title, Base Board, Colored Tags) enable themselves
+2. Settings → Community plugins → "Turn off restricted mode", then reload (Cmd+R) — the bundled plugins (QuickAdd, Front Matter Title, Base Board, Colored Tags, Breadcrumbs) enable themselves
 3. Cmd+Shift+A (Ctrl+Shift+A): your first action — the board lives in Actions/Actions.base
 Your doctrine: README-Org.md · Sync & upgrades: INSTALL.md + CHANGELOG.md
 MSG

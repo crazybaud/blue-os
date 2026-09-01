@@ -22,7 +22,9 @@ module.exports = async (params) => {
   if (!slug) { notice("Title must contain letters or digits."); return; }
 
   const dir = file.parent && file.parent.path !== "/" ? `${file.parent.path}/` : "";
-  const newPath = `${dir}${slug}.md`;
+  const fm = app.metadataCache.getFileCache(file)?.frontmatter ?? {};
+  const prefix = typeof fm.Id === "string" && /^(act|dec|info|ppl)-\d{4}$/.test(fm.Id) ? `${fm.Id}-` : "";
+  const newPath = `${dir}${prefix}${slug}.md`;
   if (newPath === file.path) { notice("Filename already in sync."); return; }
   if (app.vault.getAbstractFileByPath(newPath)) { notice(`Already exists: ${newPath}`); return; }
 

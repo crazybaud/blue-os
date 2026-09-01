@@ -1,0 +1,50 @@
+filters:
+  and:
+    - file.inFolder("Journal")
+    - file.ext == "md"
+formulas:
+  Open: link(file.name, "↗")
+properties:
+  formula.Open:
+    displayName: ↗
+views:
+  - type: table
+    name: To process
+    filters:
+      and:
+        - Processed == false
+    order:
+      - Title
+      - formula.Open
+      - Kind
+    sort:
+      - property: Date
+        direction: DESC
+    columnSize:
+      formula.Open: 40
+  - type: table
+    name: Reflexions
+    filters:
+      and:
+        - Kind == "Reflexion"
+    order:
+      - Title
+      - formula.Open
+      - Tags
+    sort:
+      - property: Date
+        direction: DESC
+    columnSize:
+      formula.Open: 40
+  - type: table
+    name: Full stream
+    order:
+      - Title
+      - formula.Open
+      - Kind
+      - Processed
+    sort:
+      - property: Date
+        direction: DESC
+    columnSize:
+      formula.Open: 40

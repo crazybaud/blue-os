@@ -1,5 +1,6 @@
 ---
 Id: act-XXXX
+aliases: ["act-XXXX · Title · Status"]  # display alias for Breadcrumbs trees — maintained by ⌘⇧B
 Title: Verb + complement, very short
 Status: Backlog      # Draft | Backlog | Ready | In progress | In Review | Done | Cancelled
 Owner: ""
@@ -38,6 +39,11 @@ views:
       - Owner
       - Effort
       - Due
+```
+
+```breadcrumbs
+type: tree
+fields: [Children]
 ```
 
 # References

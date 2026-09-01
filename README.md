@@ -103,16 +103,17 @@ stream; the dated thread inside an action is called `## History`).
 
 ### Naming
 
-- **Files**: capitalized kebab-case slugs. Actions start with a verb
-  (`Turn-off-the-legacy-wiki.md`); Journal entries with the date
-  (`2026-08-22-topic.md`); People with the capitalized name (`Alice.md` —
-  and never a bare first name when a last name or qualifier exists:
-  `Alice-Doe.md`, `Sam-Vendorco.md`). The slug is a practical identifier,
-  not a display: humans see the `Title` property everywhere (Front Matter
-  Title plugin), and a title can evolve without renaming as long as the
-  slug does not become misleading. The identity for any external reference
-  is the `Id`, never the path (a setup decision recorded in the setup
-  action's History).
+- **Files**: the object's `Id`, then the capitalized kebab-case slug —
+  `act-0012-Turn-off-the-legacy-wiki.md`, `dec-0002-Adopt-the-stack.md`,
+  `ppl-0001-Alice.md`. Actions' slugs start with a verb; People use the
+  capitalized name (never a bare first name when a last name or qualifier
+  exists: `ppl-0007-Alice-Doe.md`). Journal entries keep the date as their
+  prefix (`2026-08-22-topic.md`). The slug is a practical identifier, not a
+  display: humans see the `Title` property everywhere (Front Matter Title
+  plugin), and a title can evolve without renaming as long as the slug does
+  not become misleading. The `Id` prefix makes every listing, link and diff
+  self-identifying; the identity for any external reference is still the
+  `Id`.
 - **Properties**: leading capital (`Status`, `Effort`, `Due`…).
 - **Ids**: stable machine identifier (`act-0001`, `dec-0002`, `info-0003`,
   `ppl-0004`), unique across the whole repo, survives any rename.
@@ -124,7 +125,7 @@ stream; the dated thread inside an action is called `## History`).
   `Participants`, `Journal`) — the only format Obsidian treats as a
   relation.
 - **STRICT RULE — property wikilinks**: bare name, never a path.
-  `"[[Alice]]"`, never `"[[../People/Alice]]"` nor `"[[People/Alice]]"`.
+  `"[[ppl-0001-Alice]]"`, never `"[[../People/ppl-0001-Alice]]"` nor a path.
   Slugs being unique in the repo, the bare name always resolves. Beware:
   when re-entering a relation field in the UI, Obsidian's autocomplete
   offers the relative form (`[[../People/Bob|Bob]]`) — a consequence of the
@@ -482,7 +483,7 @@ A sixth command, **Sync filename to Title**, renames the active file to its
 `Title`'s slug (through Obsidian's native rename: all links follow). Useful
 only when the old slug has become misleading.
 
-The four bundled plugins that power all of this (pinned versions, licenses,
+The bundled plugins that power all of this (pinned versions, licenses,
 policy) are detailed in [INSTALL.md](INSTALL.md).
 
 ## Human × LLM co-editing

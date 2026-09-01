@@ -110,6 +110,11 @@ Approved community plugins, versions pinned in git
   snippet.
 - **Colored Tags 6.1.3** — automatically colors tags (nested tags blend
   their color with the root tag's), text contrast guaranteed WCAG AA.
+- **Breadcrumbs 4.21.11** — renders the action tree: `Parent` is declared
+  as the ascending relation, the implied `Children` edges unroll the full
+  descendance — in the lateral Tree view, and in note bodies through the
+  ```breadcrumbs codeblock (tree, Mermaid or Markmap). Actively maintained
+  (official takeover in May 2026), requires Obsidian 1.13+.
 - **Base Board 2.5.1** — kanban view for Bases (the “Board” view in
   `Actions.base`): drag across columns → writes `Status` into the
   frontmatter; vertical drag → manual priority written into `kanban_order`.
@@ -127,6 +132,6 @@ Hiding empty properties does not go through a plugin: the versioned snippet
 panel gets focus). Folding the Properties block is native (chevron, “Toggle
 fold properties” command).
 
-**Policy**: a community plugin is executable third-party code — keep it low. Adopting a plugin is recorded in the relevant action's
+**Policy**: a community plugin is executable third-party code — avoid piling them up. Adopting a plugin is recorded in the relevant action's
 Historique, not as an ADR: the current state lives in this README section,
 the reasoning in the History — nobody needs a Decision file for that.

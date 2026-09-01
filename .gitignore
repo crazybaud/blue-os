@@ -3,11 +3,11 @@
 # SYNC markers, then commit & push (see README → Syncing your content).
 
 # >>> SYNC — content, real-vault Obsidian config, org doctrine
-Actions/
-Decisions/
-Information/
-Journal/
-People/
+/Actions/
+/Decisions/
+/Information/
+/Journal/
+/People/
 /.obsidian/
 /README-*.md
 # <<< SYNC

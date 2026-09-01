@@ -1,0 +1,53 @@
+filters:
+  and:
+    - file.inFolder("Decisions")
+    - file.ext == "md"
+formulas:
+  Open: link(file.name, "↗")
+properties:
+  formula.Open:
+    displayName: ↗
+views:
+  - type: table
+    name: In force
+    filters:
+      and:
+        - Status == "Accepted"
+    order:
+      - Title
+      - formula.Open
+      - Decided by
+      - Date
+    sort:
+      - property: Date
+        direction: DESC
+    columnSize:
+      formula.Open: 40
+  - type: table
+    name: Pipeline
+    filters:
+      or:
+        - Status == "Draft"
+        - Status == "Proposed"
+    order:
+      - Title
+      - formula.Open
+      - Status
+      - Decided by
+      - Date
+    columnSize:
+      formula.Open: 40
+  - type: table
+    name: All
+    order:
+      - Title
+      - formula.Open
+      - Status
+      - Decided by
+      - Date
+      - Supersedes
+    sort:
+      - property: Date
+        direction: DESC
+    columnSize:
+      formula.Open: 40

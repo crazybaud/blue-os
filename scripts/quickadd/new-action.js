@@ -100,8 +100,10 @@ module.exports = async (params) => {
     : `- ${today} — Created.`;
   body = body.replace(/- (\{\{date\}\}|\d{4}-\d{2}-\d{2}) — ….*/, createdLine);
 
+  const alias = `${id} · ${title} · ${r.Status || "Backlog"}`;
   const frontmatter = `---
 Id: ${id}
+aliases: ["${alias.replace(/\"/g, "'")}"]
 Title: ${title}
 Status: ${r.Status || "Backlog"}
 Owner: "[[${r.Owner}]]"
@@ -114,7 +116,7 @@ Reviewers: [${reviewers.map((x) => `"[[${x}]]"`).join(", ")}]
 Tags: [${tags.join(", ")}]
 ---`;
 
-  const path = `Actions/${slug}.md`;
+  const path = `Actions/${id}-${slug}.md`;
   if (app.vault.getAbstractFileByPath(path)) {
     notice(`Already exists: ${path}`);
     return;
